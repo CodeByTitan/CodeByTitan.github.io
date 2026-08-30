@@ -263,7 +263,9 @@ Weight is earned by what a project proves about him, not by how recent it is.
 
 **Two phases means two, and as of 2026-08-29 it is enforced in the markup:**
 the portal, then `#brief` (the product: wordmark, hook, copy, the four stats,
-**all six phone screens in one 3 by 2 grid**, the engine as a short beat
+**all six phone screens: Ask Cloots upright, the other five laid flat on the
+loop** (4.5, "The loop"; until 2026-08-30 they were one 3 by 2 grid), the
+engine as a short beat
 with no panel and no phone, the four decisions), then `#ship`. His words:
 *"reduce the phases of cloots down to 2. we got like three different web app
 screens for this shit. lets not give algorithm its own screen and lets have
@@ -275,6 +277,21 @@ ship. The panel was the third "screen". The six phones run in the order a
 session does: the feed recorded live, a card, the product page, then Ask
 Cloots, the closet, and what the app learned. Two-up on a phone, because
 one-up was six screen-heights of scroll.
+
+**2026-08-30, the grid became the loop.** His instruction, with the Sobha
+ring and an agency hero of flat isometric cards as references: *"can we have
+our screenshots for cloots be used in the form of how It looks in the
+screenshot above and they combine to form like an infinity sort of animation
+... just leave this screen in place and use every other screenshots for the
+laid flat screens animation."* "This screen" was the Ask Cloots phone (its
+search bar carries the app's infinity button), which stays upright in the
+chassis; the recording, the feed, the product page, the closet and the taste
+model lie flat on a figure-eight beside it. The 3 by 2 grid's tidiness is the
+thing the loop's static pose has to keep, because "distributed properly" was
+his fix and the first build of the loop undid it (4.5). The unreferenced
+`cloots-app-*.jpg` set is a duplicate of `cloots-screen-*` (checked frame
+against frame), and `cloots-screen-home-feed.jpg` is a seventh screen the
+live site does not render, so neither joined the loop.
 
 - Role, exact: **Co-founder & Lead Engineer**. Never "Founder": he has
   co-founders. May 2025 to present.
@@ -994,6 +1011,82 @@ different situation.
   states are logo only. `.keyhole-frame` carries `z-index:3` so
   the pinned frame paints above the brief scrolling under it; `.scene` is
   `position:relative`, so without it DOM order would put the brief on top.
+- **The loop** (`#loop`, 2026-08-30): the other five Cloots screens laid flat
+  on a figure-eight beside the upright Ask Cloots phone. The reference is the
+  Sobha Privy Collection "Handpicked" ring (read in
+  `_source/reference/sobha-handpicked-carousel.md`) crossed with an agency
+  hero of flat isometric cards he sent, and the figure is an infinity because
+  the wordmark's "oo" is one and the Ask Cloots button is one. Built in CSS
+  3D and the GSAP already on the page, not three.js: what forced that site
+  into WebGL was bending photo tiles onto a tight ring, and a phone screen
+  must stay flat (a bent iPhone reads as a rendering error), so flat cards on
+  a 3D path is exactly what `perspective` and `translate3d` are for, the
+  cards stay real `<img>` elements with alt text, and the three degrade
+  states cost nothing. How it is built, every number tunable by eye:
+  - **The stage is the camera**: `perspective:1600px` at `50% 42%`,
+    `container-type:inline-size` so the cards size in `cqw`, `overflow:clip`
+    (on the stage, never on the plane: overflow on a `preserve-3d` element
+    flattens it). The plane is `preserve-3d`, posed `rotateX(54 - 6p)
+    rotateZ(24 - 5p)` where `p` is the block's progress through the viewport,
+    so it flattens and squares a little as it scrolls through: the Sobha
+    camera flight in two numbers. Positive rotateZ puts the far lobe upper
+    left and the near lobe lower right, his "going from up to down right".
+  - **The track** is a Gerono lemniscate, `x = A sin t, y = (A/2.09) sin 2t`,
+    A = 0.40 of the plane width, 2.09:1 measured off `cloots-infinity-ink.png`.
+    `z = 26 cos t` lifts the right lobe into a bridge over the left, so at
+    the crossing one card passes over another rather than through it, and
+    the browser's 3D sorting does the rest. It is **drawn**, a 1px hairline at
+    22% ink 30px under the plane (below the lowest card, or it draws across
+    the sunk arm's screens), written by `measure()` from the same equation
+    the cards ride: a line that is the loop, the argument 4.6 makes for the
+    timeline spine.
+  - **Fifteen cards**, three sets of five, 11cqw wide (12.5 under 900px, 15
+    under 560), spaced evenly in `t`. The repeats are `aria-hidden` with
+    empty alt and the recording's repeats are its poster, so there is one
+    video and it keeps `.app-video`'s play-on-view and reduced-motion pause.
+    Cards are axis-aligned, not turned to the tangent: turned, half of them
+    would ride upside down.
+  - **Scroll drives it, nothing else.** `TRAVEL` 0.5: a card covers half the
+    track while the block crosses the viewport, the Sobha ring's half turn,
+    scrubbed at `SCRUB`, and it stops when the hand stops. **No idle drift**:
+    a track that moves on its own is a marquee, and 4.6 says what happened to
+    those. The pointer tilts the plane up to 1.5 degrees on both axes,
+    smoothed at 0.05 on `gsap.ticker` only while the block is on screen and
+    only on a fine pointer. Depth fade 0.72 at the far edge to 1 at the near,
+    animated state only.
+  - **Every state shows the composed picture.** `loop.layout()` and
+    `loop.pose()` live above the reduced-motion return and run at load
+    (`p` 0.42, the CSS pose matches it), so reduced motion and a GSAP outage
+    show the static isometric figure, opacity 1 throughout; the cards' CSS
+    transform parks them off-canvas until that first layout so nothing
+    stacks in a corner for a frame. No script at all is a plain five-up row
+    with the repeats and the track hidden. Sizes are read in `measure()`
+    only, at load, on resize and on ScrollTrigger refresh, never per frame
+    (6, trap 18). The figure is a `.device-fig`, so it gets the same rise as
+    every phone on the page; the kept phone keeps its parallax.
+  - **The first build, and why it changed.** Ten cards at 12.5cqw on a 37
+    degree tilt with no drawn track: the screenshot showed two diagonal
+    clusters with an empty crossing, which is the "all over the place" he
+    fixed on 2026-08-29 wearing a new hat; the cards stood too upright to
+    read as laid flat (cos 37 is 0.80 of their height, the agency reference
+    is nearer 0.6); and the frame where the block enters clipped the far
+    cards at the stage's top. Drawn track, 52 degrees, fifteen smaller
+    cards and a longer perspective fixed all three in one pass.
+  - **Measured, headed Chromium, 1440 by 900, wheel through the block**:
+    frame p50 8.3ms, p95 9.3, p99 9.4, worst 15.8, zero frames over 24ms on
+    the second and third passes, identical to the claims block and the Helv
+    gallery on the same run. Headless numbers are meaningless here (see 7).
+    `verify.py` green in full, zero horizontal overflow at 390.
+  - **Not built, each with a reason**: the kept phone standing at the
+    crossing with the cards orbiting it (the phone would occlude the
+    crossing, which is the interesting part, and the near arm would occlude
+    the phone); the flat cards in the chassis (his words were "laid flat
+    screens", and the chassis rule is about not faking a phone); a pinned
+    section (4.7 allows one pin and the portal has it).
+  - **Open for his eye**: the pose (54/24 at rest), the track's weight (a
+    22% hairline is a whisper), fifteen against ten, the fade, and the phone
+    layout, where the kept phone fills the width and the loop sits under it
+    small.
 - **The drag gallery is one implementation** bound by `[data-gallery]` and
   `data-gal-*`. Both the Helv screens and the Groundwork strip use it. It
   scrolls natively on every pointer; an earlier build pinned the page for +=320%
@@ -1627,7 +1720,13 @@ quietly.
 11. **Frame profile, not just frame rate.** Record rAF intervals across a full
    page scroll and read p95, p99 and the worst frame, not the mean. The page
    was at p50 8.3ms while carrying a 268ms stall; the mean hid it completely.
-   Target: zero frames over 24ms.
+   Target: zero frames over 24ms. **Profile headed.** Headless Chromium
+   composites in software here: on 2026-08-30 it reported p50 16.7ms and 54
+   to 65 frames over 24ms on regions nothing had touched, and the loop looked
+   heavier than its baselines only in that environment. The same script with
+   `headless=False` (window parked off screen) gave p50 8.3 and zero over 24
+   everywhere. The first pass after launch is still the warm-up (6, trap 18):
+   read the second.
 
 Tooling: Playwright chromium via
 `/Users/arshsethi/Desktop/AndroidStudioProjects/JobClanker/.venv/bin/python`.
@@ -1746,7 +1845,12 @@ Review renders accumulate in `_source/review/` (gitignored).
    which reads as depth). Mouse adds a 1.4 degree tilt and a slow drift.
    Entry and exit are eased by `camera.setViewOffset` (25% of the viewport)
    rather than cut at the sticky boundary. The curved edges he noticed are the
-   tell that it is geometry: CSS 3D cannot bend a face. Not a decision, a
-   record; porting facts are in the note. Getting back to it has traps
-   (wheel is swallowed by the horizontal slider above it; load `/#selection`),
-   also in the note.
+   tell that it is geometry: CSS 3D cannot bend a face. Getting back to it
+   has traps (wheel is swallowed by the horizontal slider above it; load
+   `/#selection`), also in the note. **Built on 2026-08-30 as the Cloots
+   loop** (4.5, "The loop"), on his instruction, in CSS 3D rather than
+   three.js for the reasons recorded there. What is open is his eye on it,
+   listed in 4.5. **A variant lives on branch `loop-video-upright`** (his
+   instruction the same night): the recording upright in the chassis, Ask
+   Cloots on the loop with the other four stills, captions swapped. `main`
+   keeps Ask Cloots upright. Compare them by eye before either is merged.

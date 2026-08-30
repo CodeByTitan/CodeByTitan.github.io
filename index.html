@@ -708,6 +708,56 @@ html.lenis{scroll-behavior:auto}
   align-items:start;margin-top:clamp(40px,6vh,72px)}
 .rack .device-fig{max-width:280px;margin-inline:auto}
 .rack--6{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,56px) clamp(20px,3.4vw,44px);max-width:1020px}
+/* ============ THE LOOP · five Cloots screens laid flat on the wordmark's infinity ============
+   One upright phone (Ask Cloots, whose search bar carries the app's own
+   infinity button) beside a tilted plane where the other five screens lie
+   flat on a figure-eight and travel it with the scroll. The camera is CSS
+   perspective on .loop-stage; the plane is preserve-3d; each card is one
+   composited layer moved by translate3d, so a frame costs eleven transform
+   writes and no paint. The track is a Gerono lemniscate at the wordmark
+   ligature's 2.09:1, drawn as a hairline; the right lobe rides 26px above the plane and the left
+   26px below, so where the arms cross one card passes over the other rather
+   than through it. The pose here is the static state, what reduced motion
+   and a GSAP outage show; the animated branch writes its own (flatter and
+   squarer as the block scrolls through, the Sobha ring's camera flight in
+   two numbers), so this value only has to be right when the script is quiet.
+   Card size is in container units so the whole figure scales with its
+   column, and the track is measured off the plane at runtime. */
+.loop{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(24px,4vw,56px);align-items:center;
+  margin-top:clamp(40px,6vh,72px)}
+.loop-keep{max-width:280px;width:100%;margin-inline:auto}
+.loop-fig{min-width:0}
+.loop-stage{position:relative;aspect-ratio:16/9;overflow:clip;container-type:inline-size;
+  perspective:1600px;perspective-origin:50% 42%}
+.loop-plane{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;
+  transform:rotateX(51.5deg) rotateZ(21.9deg)}
+/* the track is drawn, a hairline that IS the loop (4.6 keeps the timeline
+   spine for the same reason), 30px under the plane so it runs beneath the
+   sunk arm as well as the bridge. Its path is written by the layout from the
+   same equation the cards ride. */
+.loop-track{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:translateZ(-30px);
+  fill:none;stroke:rgba(var(--ink-rgb),.22);stroke-width:1}
+.loop-card{position:absolute;left:0;top:0;width:11cqw;aspect-ratio:9/19.5;border-radius:1.3cqw;overflow:hidden;
+  background:#060708;box-shadow:0 12px 26px rgba(4,8,12,.20),0 0 0 1px rgba(255,255,255,.06);
+  transform:translate3d(-100%,-100%,0);will-change:transform;backface-visibility:hidden}
+.loop-card>img,.loop-card>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.loop-fig .fig{padding-top:14px}
+/* no script at all: a plain row of the five, no repeats */
+html:not(.js) .loop-stage{aspect-ratio:auto;perspective:none;overflow:visible}
+html:not(.js) .loop-plane{position:static;transform:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+html:not(.js) .loop-card{position:static;width:auto;transform:none}
+html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
+@media (max-width:900px){
+  .loop{grid-template-columns:1fr;gap:44px}
+  .loop-keep{max-width:250px}
+  .loop-stage{aspect-ratio:4/3}
+  .loop-card{width:12.5cqw;border-radius:1.5cqw}
+}
+@media (max-width:560px){
+  .loop-keep{max-width:240px}
+  .loop-stage{aspect-ratio:1/1}
+  .loop-card{width:15cqw;border-radius:1.8cqw}
+}
 /* ============ REUSABLE DRAG GALLERY ============
    Same component as the groundwork strip; the JS binds by data attribute so
    there is one implementation of the drag, the arrows and the rail. */
@@ -1173,48 +1223,53 @@ html.lenis{scroll-behavior:auto}
         <span class="stat-unit mono">DESIGNER ENGINEER</span>
       </div>
     </div>
-    <!-- the six screens, one grid, in the order a session runs: the feed
-         (recorded live), a card, the product page, then Ask Cloots, the closet
-         and what the app learned. Arsh, 2026-08-29: "lets have the 6 screens
-         in mobile app we are showing distributed properly they look all over
-         the place right now." They used to be split 2 / 1 / 3 across three
-         scenes. -->
-    <div class="rack rack--6">
-      <figure class="device-fig">
-        <div class="mock-phone">
-          <div class="mock-screen"><video class="app-video" src="assets/cloots-swipe-demo.mp4" poster="assets/cloots-poster-video.jpg" muted playsinline loop preload="metadata" width="900" height="1954" aria-label="Screen recording of the shipped Cloots app: swiping through the feed"></video><span class="mock-island" aria-hidden="true"></span></div>
-        </div>
-        <figcaption class="fig mono">RECORDED LIVE, NOT A PROTOTYPE. THE SHIPPED APP.</figcaption>
-      </figure>
-      <figure class="device-fig">
-        <div class="mock-phone">
-          <div class="mock-screen"><img src="assets/cloots-screen-swipe-feed.jpg" alt="Cloots swipe feed: a full-bleed product card with dark glass chrome and a single green accent" width="900" height="1955" loading="lazy"><span class="mock-island" aria-hidden="true"></span></div>
-        </div>
-        <figcaption class="fig mono">THE FEED</figcaption>
-      </figure>
-      <figure class="device-fig">
-        <div class="mock-phone">
-          <div class="mock-screen"><img src="assets/cloots-screen-product-details.jpg" alt="A Cloots product page: sizes, details, and a Shop on BAPE handoff to the brand's own store" width="900" height="1955" loading="lazy"><span class="mock-island" aria-hidden="true"></span></div>
-        </div>
-        <figcaption class="fig mono">THE PRODUCT PAGE HANDS YOU TO THE BRAND&rsquo;S OWN STORE</figcaption>
-      </figure>
-      <figure class="device-fig">
+    <!-- the six screens, two ways, 2026-08-30. Ask Cloots stays upright in the
+         chassis, because its search bar carries the app's own infinity button;
+         the other five lie flat on a figure-eight and travel it as the page
+         scrolls. The track has the proportions of the wordmark's "oo" ligature
+         (2.09:1, measured off cloots-infinity-ink.png). Arsh, with the Sobha
+         Privy Collection ring and an agency hero of flat isometric cards as the
+         references: "can we have our screenshots for cloots be used in the form
+         of how It looks in the screenshot above and they combine to form like an
+         infinity sort of animation ... just leave this screen in place and use
+         every other screenshots for the laid flat screens animation." The five
+         are repeated twice to fill the track (fifteen cards), the way that site
+         repeats six photos into thirteen; the repeats are aria-hidden and the recording's
+         repeat is its poster, so there is one video. The loop moves only with
+         the scroll and a little with the pointer: a track that drifts on its
+         own is a marquee, and 4.6 records what he thinks of those. Before this
+         the six sat in one 3 by 2 grid (his 2026-08-29 instruction, "distributed
+         properly"); the grid's tidiness is what the static pose has to keep.
+         See CLAUDE.md 4.5, "The loop". -->
+    <div class="loop" id="loop">
+      <figure class="device-fig loop-keep">
         <div class="mock-phone">
           <div class="mock-screen"><img src="assets/cloots-screen-ask-cloots.jpg" alt="Ask Cloots: a conversational AI search bar sitting under the feed" width="900" height="1955" loading="lazy"><span class="mock-island" aria-hidden="true"></span></div>
         </div>
         <figcaption class="fig mono">ASK CLOOTS · SEARCH IN A SENTENCE</figcaption>
       </figure>
-      <figure class="device-fig">
-        <div class="mock-phone">
-          <div class="mock-screen"><img src="assets/cloots-screen-closet.jpg" alt="The Cloots closet: a grid of saved pieces, each labelled with what it is" width="900" height="1955" loading="lazy"><span class="mock-island" aria-hidden="true"></span></div>
+      <figure class="device-fig loop-fig">
+        <div class="loop-stage" id="loopStage">
+          <div class="loop-plane" id="loopPlane">
+            <svg class="loop-track" viewBox="0 0 1000 562" preserveAspectRatio="none" aria-hidden="true"><path id="loopTrack" d="" vector-effect="non-scaling-stroke"/></svg>
+            <div class="loop-card"><video class="app-video" src="assets/cloots-swipe-demo.mp4" poster="assets/cloots-poster-video.jpg" muted playsinline loop preload="metadata" width="900" height="1954" aria-label="Screen recording of the shipped Cloots app: swiping through the feed"></video></div>
+            <div class="loop-card"><img src="assets/cloots-screen-swipe-feed.jpg" alt="Cloots swipe feed: a full-bleed product card with dark glass chrome and a single green accent" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card"><img src="assets/cloots-screen-product-details.jpg" alt="A Cloots product page: sizes, details, and a Shop on BAPE handoff to the brand's own store" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card"><img src="assets/cloots-screen-closet.jpg" alt="The Cloots closet: a grid of saved pieces, each labelled with what it is" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card"><img src="assets/cloots-screen-algorithm.jpg" alt="Cloots taste-model screen: the algorithm explains, in plain language, what it has learned about your style" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-poster-video.jpg" alt="" width="900" height="1954" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-swipe-feed.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-product-details.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-closet.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-algorithm.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-poster-video.jpg" alt="" width="900" height="1954" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-swipe-feed.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-product-details.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-closet.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+            <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-algorithm.jpg" alt="" width="900" height="1955" loading="lazy"></div>
+          </div>
         </div>
-        <figcaption class="fig mono">THE CLOSET · WHAT YOU SAVED</figcaption>
-      </figure>
-      <figure class="device-fig">
-        <div class="mock-phone">
-          <div class="mock-screen"><img src="assets/cloots-screen-algorithm.jpg" alt="Cloots taste-model screen: the algorithm explains, in plain language, what it has learned about your style" width="900" height="1955" loading="lazy"><span class="mock-island" aria-hidden="true"></span></div>
-        </div>
-        <figcaption class="fig mono">WHAT IT LEARNED ABOUT YOU, IN PLAIN LANGUAGE</figcaption>
+        <figcaption class="fig mono">RECORDED LIVE, NOT A PROTOTYPE · THE FEED, THE PRODUCT PAGE, THE CLOSET, WHAT IT LEARNED · ON THE LOOP THE WORDMARK CARRIES</figcaption>
       </figure>
     </div>
 
@@ -1595,6 +1650,72 @@ html.lenis{scroll-behavior:auto}
     }, { threshold: 0.3 });
     vids.forEach(function (v) { io.observe(v); });
   }
+
+  /* ============ THE LOOP · layout ============
+     Five Cloots screens on a figure-eight (CLAUDE.md 4.5, "The loop"). This
+     part runs in every state: it puts each card on the track for a given
+     progress and poses the plane, so reduced motion and a GSAP outage both
+     show the composed isometric picture rather than ten cards stacked in a
+     corner. The animated branch drives `layout` from the scroll and `pose`
+     from the pointer. Sizes are measured once and on resize, never per
+     frame: an offsetWidth read right after Lenis's scroll write is a forced
+     layout in the middle of a frame (6, trap 18 from the other side).
+     The track: x = A sin t, y = (A / 2.09) sin 2t, the Gerono lemniscate at
+     the wordmark ligature's proportions; z = LIFT cos t, so the right lobe
+     is a bridge over the left where the arms cross. `TRAVEL` is how much of
+     the track a card covers while the block crosses the viewport: the Sobha
+     ring's half turn. */
+  var loop = (function () {
+    var stage = document.getElementById('loopStage');
+    var plane = document.getElementById('loopPlane');
+    if (!stage || !plane) return null;
+    var cards = Array.prototype.slice.call(plane.querySelectorAll('.loop-card'));
+    var N = cards.length, TAU = Math.PI * 2;
+    var TRAVEL = 0.5, LIFT = 26, RATIO = 2.09;
+    var track = document.getElementById('loopTrack');
+    var W = 0, H = 0, cw = 0, ch = 0, A = 0, yAmp = 0;
+    var cur = { p: 0.42, mx: 0, my: 0, fade: false };
+    function measure() {
+      W = plane.offsetWidth; H = plane.offsetHeight;
+      cw = cards[0].offsetWidth; ch = cards[0].offsetHeight;
+      A = W * 0.40; yAmp = A / RATIO;
+      if (track) {   // the drawn loop, from the same equation the cards ride
+        var d = [], cx = W / 2, cy = H / 2, K = 160;
+        for (var k = 0; k <= K; k++) {
+          var t = k / K * TAU;
+          d.push((k ? 'L' : 'M') + (cx + A * Math.sin(t)).toFixed(1) + ' ' + (cy + yAmp * Math.sin(2 * t)).toFixed(1));
+        }
+        track.setAttribute('d', d.join('') + 'Z');
+        track.parentNode.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      }
+    }
+    function layout(p, fade) {
+      cur.p = p; cur.fade = !!fade;
+      var cx = W / 2, cy = H / 2;
+      for (var i = 0; i < N; i++) {
+        var u = (i / N + p * TRAVEL) % 1, t = u * TAU;
+        var x = A * Math.sin(t), y = yAmp * Math.sin(2 * t), z = LIFT * Math.cos(t);
+        cards[i].style.transform = 'translate3d(' + (cx + x - cw / 2).toFixed(1) + 'px,' +
+                                   (cy + y - ch / 2).toFixed(1) + 'px,' + z.toFixed(1) + 'px)';
+        /* the far edge of the plane sits at 72%, the near edge at 100%: a depth
+           cue, not a fade. Never applied in the static states. */
+        cards[i].style.opacity = fade ? (0.86 + 0.14 * (y / yAmp)).toFixed(3) : '';
+      }
+    }
+    function pose(p, mx, my) {
+      cur.mx = mx; cur.my = my;
+      var rx = 54 - 6 * p + my * 3, ry = mx * 3, rz = 24 - 5 * p + mx * 1.5;
+      plane.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) rotateZ(' + rz.toFixed(2) + 'deg)';
+    }
+    var rsz = 0;
+    window.addEventListener('resize', function () {
+      cancelAnimationFrame(rsz);
+      rsz = requestAnimationFrame(function () { measure(); layout(cur.p, cur.fade); pose(cur.p, cur.mx, cur.my); });
+    });
+    measure(); layout(cur.p, false); pose(cur.p, 0, 0);
+    return { stage: stage, layout: layout, pose: pose, measure: measure, cur: cur };
+  })();
+  window.__loop = loop;   // the verification harness reads card positions through this
 
 
   /* ==================================================================
@@ -2970,6 +3091,37 @@ html.lenis{scroll-behavior:auto}
         animation: gsap.to(row, { opacity: 1, y: 0, duration: 0.5, delay: i * 0.08, ease: 'power2.out', paused: true })
       });
     });
+
+    /* ============ 02C2 THE LOOP · drive ============
+       Scroll drives the track: the cards travel half the figure-eight while
+       the block crosses the viewport, scrubbed like everything else, and stop
+       when the hand stops. Nothing here runs on the clock: an idle drift would
+       make it a marquee. The pointer tilts the plane a degree or two, smoothed
+       on the ticker and only while the block is on screen. */
+    if (loop) {
+      var lp = { p: 0.42 }, lmx = 0, lmy = 0, ltx = 0, lty = 0, llive = false;
+      var loopPaint = function () { loop.layout(lp.p, true); loop.pose(lp.p, lmx, lmy); };
+      gsap.fromTo(lp, { p: 0 }, {
+        p: 1, ease: 'none', immediateRender: false, onUpdate: loopPaint,
+        scrollTrigger: {
+          trigger: loop.stage, start: 'top bottom', end: 'bottom top', scrub: SCRUB,
+          onRefresh: function () { loop.measure(); loopPaint(); },
+          onToggle: function (self) { llive = self.isActive; }
+        }
+      });
+      if (FINE) {
+        window.addEventListener('pointermove', function (e) {
+          ltx = e.clientX / window.innerWidth - 0.5; lty = e.clientY / window.innerHeight - 0.5;
+        }, { passive: true });
+        gsap.ticker.add(function () {
+          if (!llive) return;
+          var dx = ltx - lmx, dy = lty - lmy;
+          if (Math.abs(dx) < 0.0005 && Math.abs(dy) < 0.0005) return;
+          lmx += dx * 0.05; lmy += dy * 0.05;
+          loop.pose(lp.p, lmx, lmy);
+        });
+      }
+    }
 
     /* ============ 02D ENGINE FLOW ============ */
     (function () {

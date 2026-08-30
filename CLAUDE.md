@@ -197,12 +197,29 @@ of any large addition. `ROUND-5-MANDATE.md` exists because of this.
 
 ## 2.7 Git
 
-`arsh-portfolio` has no `.git` of its own. **`cd` into it is not enough
-protection**: git walks up and `rev-parse --show-toplevel` resolves to
-`/Users/arshsethi`, the home directory repo (origin `CodeByTitan/SpetX.git`).
-Check `git rev-parse --show-toplevel` before every git command here, until
-someone runs `git init` in the folder. Deploy target is a new public repo named
-exactly `CodeByTitan.github.io`.
+**Since 2026-08-30 the folder is its own repo.** `git init` was run in it, the
+first commit (`be95ad7`, 80 files, 8.0MB) is pushed, and `origin` is
+`https://github.com/CodeByTitan/CodeByTitan.github.io.git`, created
+**private** at his request. `git rev-parse --show-toplevel` now resolves
+here. Before that date it resolved to `/Users/arshsethi`, the home-directory
+repo (origin `CodeByTitan/SpetX.git`), and any git command run in the folder
+acted on that repo. If a session ever sees that path again, stop: the `.git`
+has gone missing.
+
+What ships and what stays local is `.gitignore`'s job: raw font archives,
+`_source/`, the personal-use display faces, `Gotham/` and the misnamed
+`Android Studio.zip` (it is the Gotham archive; `unzip -l` shows only
+`Gotham/*.otf`) stay out. The three staged TNR MT cuts and the woff2 subsets
+in `assets/fonts` ship. `CLAUDE.md` is committed.
+
+**Pages does not serve a private repo on a free plan.** The repo is named
+`CodeByTitan.github.io` so that flipping it to public is the whole deploy:
+Pages then publishes `main` at https://codebytitan.github.io with no rename.
+Before that flip, decide what a public repo should carry: this file (candid
+notes, his words), `FONT-LICENSE-DECISION.md`, and the shipped font files
+(see 8.4). `gh` is not installed; the repo was created through the GitHub API
+with the classic PAT (`repo` scope) that osxkeychain holds for github.com,
+which is also what authenticates the push.
 
 ## 2.8 His keyboard inserts stray `d` characters
 
@@ -1630,7 +1647,8 @@ Review renders accumulate in `_source/review/` (gitignored).
    position did not cover. See 4.4.
 5. **The og-image** regenerates from the live hero; re-run it after visual
    changes.
-6. **Deploy** has not happened. See 2.7.
+6. **Deploy** has not happened. The repo exists since 2026-08-30 (private,
+   see 2.7); the deploy is the flip to public plus the checks listed there.
 7. Pending his assets: a possible bitmoji or line portrait for the reserved
    `.hero-avatar` slot (his call alone, and the advice he accepted was to route
    it small near the footer rather than the hero), and a possible current photo.

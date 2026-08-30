@@ -1653,6 +1653,13 @@ average; it hitched, and hitches are what read as unsmooth.
   the risk recorded when it was offered: the jab sits on the same screen as
   the Java challenge and the A+, which say the opposite, so the line should
   carry the degree's completion too, or it undersells him.
+  **Settled, 2026-08-30 ("use 1"): "I came here for a degree. It turned out
+  to be the side project. Finished it in three and a half years anyway."**
+  The "anyway" is load-bearing: it is what keeps the jab from saying he did
+  not take the degree seriously on the same screen as the exams and the A+.
+  Rejected the same round: fact-first ("finished it in three and a half
+  years. It turned out to be the side project.") and the terse
+  timeline-voiced version ("Three and a half years for the degree...").
 - Cloots ship board: see 3.1.
 - Status: **"Open to anything worth building."** followed by his own framing:
   roles, projects, things that do not exist yet; if it genuinely intrigues him

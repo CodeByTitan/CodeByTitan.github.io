@@ -19,6 +19,17 @@ either. It has already caught one that would otherwise have shipped.
 
 ## HOW TO READ THIS FILE
 
+**Companion file: `SKILLS.md`.** This file is the design and content memory of
+the site. `SKILLS.md` is his technical inventory: every language, platform,
+framework and service with the evidence for each, plus the "never claim" list
+and pre-written blocks for application forms. It answers a different question
+and it has a different reader. Two rules there that matter here too: nothing
+goes in without evidence in the same edit, and the projects deliberately kept
+off the portfolio (LiQart, RideShare, BudgetMaster, DialogPracticeApp,
+dineadmin) are still valid evidence on a form, exactly the way Grinners Food
+Systems is. Do not strip them from `SKILLS.md` on the strength of a portfolio
+decision.
+
 This is not a summary, at Arsh's request. It is the whole working memory of the
 project: the facts, the confirmed wordings, the decisions, the reasons behind
 them, and the traps. **Everything here is current.** Where something was tried
@@ -1613,6 +1624,16 @@ average; it hitched, and hitches are what read as unsmooth.
   claim the chapter then keeps; a label just names the section. The timeline
   underneath is the proof, because every project on the page postdates the
   photograph beside it.
+- Journey lead, under the hook: was "I came here for a degree and started
+  shipping before anybody asked me to." **He cut the second half on
+  2026-08-30** ("remove this before anybody asked me to"), and the cut was
+  right for a reason he did not state: "Nobody asked for any of this" already
+  opens the close, so the beat ran twice, and the clause was the assertion
+  kind of claim 1.3 warns about. The line is "I came here for a degree and
+  started shipping." while he picks a second half; whatever replaces it
+  should be a fact the timeline underneath then proves (first year, week
+  one, two exams) rather than a claim about initiative, and must not reuse
+  the close's "nobody asked".
 - Cloots ship board: see 3.1.
 - Status: **"Open to anything worth building."** followed by his own framing:
   roles, projects, things that do not exist yet; if it genuinely intrigues him

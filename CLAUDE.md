@@ -263,8 +263,9 @@ Weight is earned by what a project proves about him, not by how recent it is.
 
 **Two phases means two, and as of 2026-08-29 it is enforced in the markup:**
 the portal, then `#brief` (the product: wordmark, hook, copy, the four stats,
-**all six phone screens: Ask Cloots upright, the other five laid flat on the
-loop** (4.5, "The loop"; until 2026-08-30 they were one 3 by 2 grid), the
+**all six phone screens: the recording upright, the five stills laid flat on
+the loop** (4.5, "The loop"; until 2026-08-30 they were one 3 by 2 grid;
+on `main` it is Ask Cloots upright and the recording on the loop), the
 engine as a short beat
 with no panel and no phone, the four decisions), then `#ship`. His words:
 *"reduce the phases of cloots down to 2. we got like three different web app
@@ -1011,8 +1012,16 @@ different situation.
   states are logo only. `.keyhole-frame` carries `z-index:3` so
   the pinned frame paints above the brief scrolling under it; `.scene` is
   `position:relative`, so without it DOM order would put the brief on top.
-- **The loop** (`#loop`, 2026-08-30): the other five Cloots screens laid flat
-  on a figure-eight beside the upright Ask Cloots phone. The reference is the
+- **The loop** (`#loop`, 2026-08-30): the five Cloots stills laid flat on a
+  figure-eight beside the upright recording. **This is branch
+  `loop-video-upright`**, his instruction the same night: *"replace the
+  image i gave you, blue shirt thing with the video of swiping clothes, and
+  the image earlier put it in the infinity instead. obviously change the
+  subtext for them."* So the chassis holds the live recording with its own
+  caption ("Recorded live, not a prototype. The shipped app."), Ask Cloots
+  rides the loop third, in session order, and the loop caption names the
+  five. `main` has the first arrangement, Ask Cloots upright. The numbers
+  below are the same on both. The reference is the
   Sobha Privy Collection "Handpicked" ring (read in
   `_source/reference/sobha-handpicked-carousel.md`) crossed with an agency
   hero of flat isometric cards he sent, and the figure is an infinity because
@@ -1042,8 +1051,10 @@ different situation.
     timeline spine.
   - **Fifteen cards**, three sets of five, 11cqw wide (12.5 under 900px, 15
     under 560), spaced evenly in `t`. The repeats are `aria-hidden` with
-    empty alt and the recording's repeats are its poster, so there is one
-    video and it keeps `.app-video`'s play-on-view and reduced-motion pause.
+    empty alt. On this branch the loop is all stills and the one video is in
+    the chassis, where `.app-video`'s play-on-view and reduced-motion pause
+    apply as before (on `main` the recording rides the loop and its repeats
+    are its poster).
     Cards are axis-aligned, not turned to the tangent: turned, half of them
     would ride upside down.
   - **Scroll drives it, nothing else.** `TRAVEL` 0.5: a card covers half the

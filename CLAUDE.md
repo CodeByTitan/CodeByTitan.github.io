@@ -212,14 +212,50 @@ What ships and what stays local is `.gitignore`'s job: raw font archives,
 `Gotham/*.otf`) stay out. The three staged TNR MT cuts and the woff2 subsets
 in `assets/fonts` ship. `CLAUDE.md` is committed.
 
-**Pages does not serve a private repo on a free plan.** The repo is named
-`CodeByTitan.github.io` so that flipping it to public is the whole deploy:
-Pages then publishes `main` at https://codebytitan.github.io with no rename.
-Before that flip, decide what a public repo should carry: this file (candid
-notes, his words), `FONT-LICENSE-DECISION.md`, and the shipped font files
-(see 8.4). `gh` is not installed; the repo was created through the GitHub API
-with the classic PAT (`repo` scope) that osxkeychain holds for github.com,
-which is also what authenticates the push.
+**Live since 2026-08-30 at https://codebytitan.github.io, from THIS branch,
+`loop-video-upright`, and the repo is public.** His instructions that night,
+in order: deploy the branched version, do not merge it into `main` ("I
+actually want to make more changes in main later"), make the repo public,
+and put online only the assets the page uses. How that is built:
+
+- **`tools/dist.py` decides what goes online**: `index.html`, a `.nojekyll`,
+  and every `assets/...` path with a file extension that `index.html`
+  mentions (41 files, 4.0MB). `CLAUDE.md`, `FONT-LICENSE-DECISION.md`,
+  `tools/`, `arsh.jpg` and the 30 unreferenced Cloots assets stay in the repo
+  and answer 404 on the site (checked). A path that appears only in a comment
+  (`assets/arsh-bitmoji.png`, the reserved avatar slot) is reported and
+  skipped, not fatal. `dist/` is gitignored.
+- **`.github/workflows/pages.yml` publishes `dist/` on every push to
+  `loop-video-upright`** (and on manual dispatch) through
+  `actions/upload-pages-artifact` and `actions/deploy-pages`. The file exists
+  only on this branch, so **a push to `main` changes nothing online**; `main`
+  is a workspace. Pages' source is "GitHub Actions" (set through the API,
+  `build_type: workflow`), never "deploy from a branch", which would serve
+  the whole repo root, this file included.
+- **The `github-pages` environment only allowed `main` to deploy.** GitHub
+  creates that environment with a branch policy of the default branch, so
+  the first run failed at job start with no steps and no log, only an
+  annotation: *Branch "loop-video-upright" is not allowed to deploy to
+  github-pages due to environment protection rules.* The policy now lists
+  both branches (Settings, Environments, github-pages, or the
+  deployment-branch-policies API). Any third deploying branch needs adding
+  there first.
+- **Right after the flip to public, one push was refused with "Repository
+  is disabled. Please ask the owner to check their account."** It was the
+  visibility change still settling; the same push succeeded thirty seconds
+  later and the API reported `disabled: false` throughout. Retry once before
+  reading it as an account problem.
+- `gh` is not installed; the repo was created, made public, and its Pages
+  and environment configured through the GitHub API with the classic PAT
+  (`repo` scope) that osxkeychain holds for github.com, which also
+  authenticates pushes. The API's run listing carries a control character
+  in commit bodies; parse it with `json.loads(..., strict=False)`.
+- **What going public exposed, his decision**: this file and its history
+  are readable on github.com (they are not served on the site), and the
+  font files that ship (see 4.4 and 8.4) are now downloadable by anyone.
+- Verified on the live URL under Playwright: every face loads, no broken
+  media, zero console errors, GSAP from the CDN, Lenis, the loop's fifteen
+  cards and the recording in the chassis.
 
 ## 2.8 His keyboard inserts stray `d` characters
 
@@ -1767,8 +1803,11 @@ Review renders accumulate in `_source/review/` (gitignored).
    position did not cover. See 4.4.
 5. **The og-image** regenerates from the live hero; re-run it after visual
    changes.
-6. **Deploy** has not happened. The repo exists since 2026-08-30 (private,
-   see 2.7); the deploy is the flip to public plus the checks listed there.
+6. **Deployed, 2026-08-30**: https://codebytitan.github.io serves this branch
+   through the Pages workflow (2.7). Still open from the deploy: the font
+   licences are now a public matter (8.4), the og image should be regenerated
+   from the live hero (8.5), and `main` does not deploy until a workflow is
+   added there or this branch is merged, his call.
 7. Pending his assets: a possible bitmoji or line portrait for the reserved
    `.hero-avatar` slot (his call alone, and the advice he accepted was to route
    it small near the footer rather than the hero), and a possible current photo.

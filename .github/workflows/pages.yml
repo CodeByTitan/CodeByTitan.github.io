@@ -1,0 +1,32 @@
+# Publishes the site from THIS branch. main is a workspace and does not
+# deploy: this file only exists on the deploying branch, so a push to main
+# changes nothing online. tools/dist.py decides what goes up (index.html and
+# the assets it references, nothing else).
+name: Deploy site
+on:
+  push:
+    branches: [loop-video-upright]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build dist (index.html plus only the assets it references)
+        run: python3 tools/dist.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

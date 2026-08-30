@@ -52,3 +52,6 @@ Android Studio.zip
 
 # Python bytecode from tools/
 __pycache__/
+
+# build output of tools/dist.py, published by the Pages workflow
+dist/

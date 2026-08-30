@@ -294,6 +294,16 @@ his fix and the first build of the loop undid it (4.5). The unreferenced
 against frame), and `cloots-screen-home-feed.jpg` is a seventh screen the
 live site does not render, so neither joined the loop.
 
+**The fourth stat, 2026-08-30.** "1 / DESIGNER ENGINEER" became
+"1,000+ / EXTERNAL TESTERS" on his instruction: *"instead fo 1 designer
+engineer, put 3000+ users externally tested or tested by 1000+ external users,
+something along those lines."* He gave two figures in one breath. The smaller
+went on the page because it is true under either reading, and 8 carries the
+question; put 3,000+ in only when he confirms it. The odometer takes the
+comma and the plus as still columns, the way it takes the M in 1M+. The
+sole-credit line ("Designed and developed solo") already carries what the
+retired stat said.
+
 - Role, exact: **Co-founder & Lead Engineer**. Never "Founder": he has
   co-founders. May 2025 to present.
 - **The honesty line, which must survive every rewrite:** "Designed and
@@ -1865,3 +1875,6 @@ Review renders accumulate in `_source/review/` (gitignored).
    instruction the same night): the recording upright in the chassis, Ask
    Cloots on the loop with the other four stills, captions swapped. `main`
    keeps Ask Cloots upright. Compare them by eye before either is merged.
+12. **The tester count.** 1,000+ external testers is on the page; in the same
+   sentence he said 3,000+ users. Confirm the real figure and what it counts
+   (testers, or sessions) before the site goes public. See 3.1.

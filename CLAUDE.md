@@ -58,9 +58,23 @@ the change.
 - Came to Canada as an international student. Bachelor of Computer Science,
   University of New Brunswick, from Sept 2022, graduating April 2026. **First
   year at the Saint John campus.**
+  - **"Completed my degree in 3.5 years"** is his framing (2026-08-30) and
+    he wants it on the page. The arithmetic: Sept 2022 to April 2026 is 43
+    months, 3.6 years, so "three and a half" is true as elapsed time and
+    slightly understates it. It is also the ordinary Sept-to-April calendar
+    of an eight-semester degree, so it is not an early finish and the page
+    must never pair it with "four-year" or "early". Elapsed time, stated
+    plainly, is the safe form.
 - Started Python, then Java in 2021. Five years of Java by 2026.
 - In first year he challenged Java I and Java II for credit and passed both
-  examinations.
+  examinations. **One exam per semester, not two in one week.** His
+  correction, 2026-08-30: *"Week one i only sat one final btw, but it was
+  week ones of both semester, fall and winter."* So: Java I's final in week
+  one of the fall term, Java II's in week one of the winter term. The
+  timeline card had said "I wrote both final exams in my first week" and
+  was live with it for a day; it now reads "Each semester, I wrote the final
+  exam in week one and got the credit." Never collapse the two into one
+  week again.
   - **CONFIRMED WORDING ONLY: "the first student at the Saint John campus to
     do so for both courses."** He is 100% sure of the both-courses claim.
   - **"Challenge for credit" is jargon and the page now explains it.** Arsh,
@@ -1633,7 +1647,12 @@ average; it hitched, and hitches are what read as unsmooth.
   started shipping." while he picks a second half; whatever replaces it
   should be a fact the timeline underneath then proves (first year, week
   one, two exams) rather than a claim about initiative, and must not reuse
-  the close's "nobody asked".
+  the close's "nobody asked". **Direction he chose, 2026-08-30:** "the
+  degree turned out to be the side project" (his words: "i do like the
+  degree became side project deal"), with the 3.5 years in it (1.2). Note
+  the risk recorded when it was offered: the jab sits on the same screen as
+  the Java challenge and the A+, which say the opposite, so the line should
+  carry the degree's completion too, or it undersells him.
 - Cloots ship board: see 3.1.
 - Status: **"Open to anything worth building."** followed by his own framing:
   roles, projects, things that do not exist yet; if it genuinely intrigues him

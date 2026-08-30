@@ -1,0 +1,54 @@
+# The raw Monotype family stays local. Only the three staged cuts in
+# assets/fonts ship with the site.
+Times New Roman MT Std/
+.DS_Store
+Switzer_Complete/
+Switzer_Complete.zip
+
+# local font archives, never shipped
+Inter.zip
+Inter/
+
+# raw capture sources, kept local. Only the trimmed clips in assets/ ship.
+_source/
+
+# Personal-use display fonts. The letterforms ship as inlined SVG paths
+# (see index.html, OUTLINE DISPLAY TYPE), so the font files themselves must
+# never be committed: publishing an .otf to GitHub Pages is redistribution
+# whatever the personal-vs-commercial argument says.
+lumiare/
+lumiare.zip
+boreck-display-font/
+boreck-display-font.zip
+bethany-elingston.rar
+
+# generated, regenerate with tools/mkglyphs.py
+tools/glyphs.json
+
+# raw commercial font downloads stay local; only the subsetted woff2 ship
+sf-pro-display/
+helvetica-neue/
+sf-pro-display.zip
+
+munich/
+munich.zip
+Bemore Serif.otf
+bemore-serif-*.zip
+
+editors-note-font-family/
+editors-note-font-family.zip
+Bemore Serif.otf
+
+futura-pt/
+futura-pt.zip
+
+helv_imgs/
+anton/
+Gotham/
+
+# "Android Studio.zip" is the Gotham font family archive under a misleading
+# name (unzip -l shows Gotham/*.otf). Commercial font, stays local like Gotham/.
+Android Studio.zip
+
+# Python bytecode from tools/
+__pycache__/

@@ -1044,6 +1044,65 @@ different situation.
     as a jump cut. The first build washed to the ground and released onto a
     viewport of empty cream; measured, it read as dead page.
 
+  **The portal plays on the way down only (up mode), 2026-08-30.** His
+  words: *"disallow the cloots animation to play when user is scrolling up,
+  just make a linear gradient transition between cloots a swipe feed screen
+  and the bottom of any 1 screen so when the user is scrolling up, they dont
+  need to go through that transition again. that transition of cloots
+  blurred image and everything should work only on the scroll down."* How:
+  - `html.portal-up` is a mode, set by the pin's `onEnterBack` (entered from
+    below) and by the WORK link, cleared by the ground timeline's `onEnter`
+    (a descent into the approach band from above) and `onLeaveBack` (the
+    reader is above the band). Both clears are skipped inside the 1.5s
+    anchor window, because a WORK jump flies through both triggers going
+    down and must keep its mode. **A mid-pin wheel-up does not engage it**:
+    that is the abort hatch, and that reader may still scrub the story.
+    And **any descent into the pin from above plays**, even one that
+    turned around inside the approach band while in up mode (measured:
+    up to 51px below the band's top, then down, and the autoscroll started
+    at progress 0.03 with the frame visible). At that instant the band
+    fades over 0.35s while the marbling appears at once: a cut, accepted,
+    because a CSS transition on the marbling's opacity would smear its
+    scrubbed tween on every other frame. A reversal that happens INSIDE
+    the pin keeps the mode: no replay, no autoscroll, the band all the way
+    down to the brief.
+  - In the mode, CSS `!important` holds the pinned frame and the marbling
+    hidden and the nav and the brief visible, over the timelines' inline
+    values; the frame keeps the `cloots` label so the stage never goes
+    black; `autoStart` and `autoRearm` refuse to drive; the typewriter
+    chase holds at zero. One class write on `<html>` per mode change, never
+    per frame (6, trap 18).
+  - **The gradient is a real band in the flow**, `.portal-up-band`, absolute
+    inside `#cloots` from the section's top over approach + frame + tail
+    (232svh; 202svh on a phone), transparent at the top so the any1 night
+    shows through, Cloots ground from 52% down. It scrolls 1:1 with the
+    wheel, so the way up is a moving gradient rather than a pinned void, and
+    it is opacity 0 outside the mode, so the static states never see it.
+    Measured: from the brief, eight wheel-ups moved the page 6655 to 4420
+    with the frame at `visibility:hidden`, the marbling at 0, the band at 1
+    and the nav at 1 throughout.
+  - **Not done, and why**: collapsing the portal's scroll distance on the way
+    up (a layout change mid-scroll under a pin, a refresh and a compensating
+    jump, the class of thing 6.14 and 6.17 are about) and an immediate jump
+    over the pin (a cut between two different screens). The band costs 2.3
+    viewports of gradient on the way up, which is the same distance the
+    reader scrolled coming down.
+
+  **WORK goes straight to the brief.** His words: *"when user clicks on work
+  lead the user to 03 · Cloots · Co-founder & Lead Engineer this screen
+  without any previous animation ... when user is clicking on work on the
+  top right it should take user straight to that screen."* `#navWork` links
+  to `#brief`; a capture-phase click handler on `window` (ahead of Lenis's
+  anchor handling and the no-Lenis fallback) sets up mode, jumps with
+  `lenis.scrollTo(y, {immediate:true, force:true})` to the brief's top less
+  the 72px every `[id]` carries as scroll-margin, and calls
+  `ScrollTrigger.update()`. Measured: lands at exactly brief minus 72 with
+  no autoscroll and the frame hidden, and stays there. In the static states
+  the handler does not exist and the anchor is a plain jump, which is right
+  because there is no portal there. **ANY1 left the nav the same night**
+  ("also remove any1 from the top bar"); the section stays, with its
+  `data-phase`.
+
   **What the flicker taught before it was cut:** the masked screens must be
   hidden until the fade beat or the glyphs show before the logo has arrived;
   the nav's scrim follows `--bg-rgb`, so any ground hand-over while the frame
@@ -1140,6 +1199,16 @@ different situation.
     the phone); the flat cards in the chassis (his words were "laid flat
     screens", and the chassis rule is about not faking a phone); a pinned
     section (4.7 allows one pin and the portal has it).
+  - **Two things he cut on sight, 2026-08-30.** The loop's caption ("THE
+    FEED, THE PRODUCT PAGE, ASK CLOOTS ... ON THE LOOP THE WORDMARK CARRIES"):
+    gone, the figure carries no figcaption now. And **the stage's
+    `overflow:clip`**, which cut the near cards with a straight edge across
+    the bottom of the figure; he sent the crop and called it "this weird
+    line ... hiding the infinity loop ... that divider should not be there".
+    The clip moved to `overflow-x` on the `.loop` grid, for the 390px
+    overflow gate only, and `.loop-fig` gained bottom padding for the
+    overhang. Cards may now overhang the stage vertically; measure the gap
+    to `#engine` after any pose change.
   - **Open for his eye**: the pose (54/24 at rest), the track's weight (a
     22% hairline is a whisper), fifteen against ten, the fade, and the phone
     layout, where the kept phone fills the width and the loop sits under it

@@ -505,6 +505,28 @@ html.lenis{scroll-behavior:auto}
    clears. Animated state only: the static states have no pin and need no gap. */
 .portal-tail{height:0}
 .js-anim .portal-tail{height:60vh;height:60svh}
+/* UP MODE. Arsh, 2026-08-30: "disallow the cloots animation to play when user
+   is scrolling up, just make a linear gradient transition between cloots a
+   swipe feed screen and the bottom of any 1 screen ... that transition of
+   cloots blurred image and everything should work only on the scroll down".
+   html.portal-up is set by the portal block when the pin is entered from
+   below (or WORK is clicked) and cleared once the reader is above the
+   approach band heading down, so the next descent plays in full. In up mode
+   the pinned frame and the marbling are held hidden (!important beats the
+   timelines' inline values), the nav and the brief are held visible, the
+   frame keeps the cloots label so the stage never goes black, and the band
+   below paints the gradient. Nothing here runs in the static states: the
+   class is only ever written by the animated branch. */
+#cloots{position:relative}
+.portal-up-band{position:absolute;left:0;right:0;top:0;height:calc(72svh + 100svh + 60svh);pointer-events:none;opacity:0;
+  transition:opacity .35s;
+  background:linear-gradient(to bottom,rgba(251,254,252,0) 0%,rgba(251,254,252,0) 22%,#FBFEFC 52%,#FBFEFC 100%)}
+@media (max-width:699px){.portal-up-band{height:calc(72svh + 100svh + 30svh)}}
+html.portal-up .portal-up-band{opacity:1}
+html.portal-up #khFrame{visibility:hidden!important;opacity:0!important}
+html.portal-up #portalGround{opacity:0!important}
+html.portal-up .nav{opacity:1!important;visibility:visible!important}
+html.portal-up #brief{opacity:1!important;visibility:visible!important}
 @media (max-width:699px){.portal-line{font-size:7.8vw;width:94vw}.js-anim .portal-tail{height:30vh;height:30svh}}
 .portal-line .tw-caret{background:#fff;width:.06em}
 .portal-line .tw-br{display:none}
@@ -723,11 +745,16 @@ html.lenis{scroll-behavior:auto}
    two numbers), so this value only has to be right when the script is quiet.
    Card size is in container units so the whole figure scales with its
    column, and the track is measured off the plane at runtime. */
+/* overflow-x clip on the grid, not on the stage: the stage's own clip cut
+   the near cards with a straight edge that read as a divider across the
+   loop (Arsh, 2026-08-30: "that divider should not be there"). Cards may
+   now overhang the stage vertically; only a horizontal overhang is clipped,
+   for the 390px overflow gate. */
 .loop{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(24px,4vw,56px);align-items:center;
-  margin-top:clamp(40px,6vh,72px)}
+  margin-top:clamp(40px,6vh,72px);overflow-x:clip}
 .loop-keep{max-width:280px;width:100%;margin-inline:auto}
-.loop-fig{min-width:0}
-.loop-stage{position:relative;aspect-ratio:16/9;overflow:clip;container-type:inline-size;
+.loop-fig{min-width:0;padding-bottom:clamp(24px,5vh,72px)}
+.loop-stage{position:relative;aspect-ratio:16/9;container-type:inline-size;
   perspective:1600px;perspective-origin:50% 42%}
 .loop-plane{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;
   transform:rotateX(51.5deg) rotateZ(21.9deg)}
@@ -741,9 +768,8 @@ html.lenis{scroll-behavior:auto}
   background:#060708;box-shadow:0 12px 26px rgba(4,8,12,.20),0 0 0 1px rgba(255,255,255,.06);
   transform:translate3d(-100%,-100%,0);will-change:transform;backface-visibility:hidden}
 .loop-card>img,.loop-card>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.loop-fig .fig{padding-top:14px}
 /* no script at all: a plain row of the five, no repeats */
-html:not(.js) .loop-stage{aspect-ratio:auto;perspective:none;overflow:visible}
+html:not(.js) .loop-stage{aspect-ratio:auto;perspective:none}
 html:not(.js) .loop-plane{position:static;transform:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 html:not(.js) .loop-card{position:static;width:auto;transform:none}
 html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
@@ -954,9 +980,12 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
     <span class="nav-name-full" id="navNameFull"><svg class="nav-nm" viewBox="-122.8 -674.5 6383.5 699.9" role="img" aria-label="Arsh Sethi" preserveAspectRatio="xMinYMid meet" focusable="false"><path d="M405.0 -33C405.0 -25.7 405.7 -14.7 407.0 0.0H667.0V-379.0C667.0 -452.3 661.2 -508.5 649.5 -547.5C637.8 -586.5 615.0 -615.0 581.0 -633.0C547.0 -651.0 496.3 -660.0 429.0 -660.0H120.0L10.0 0.0H280.0L317.0 -196.0C337.7 -218.0 361.8 -236.7 389.5 -252.0C417.2 -267.3 443.0 -275.0 467.0 -275.0C475.7 -275.0 485.0 -273.3 495.0 -270.0C466.3 -226.7 444.2 -186.7 428.5 -150.0C412.8 -113.3 405.0 -74.3 405.0 -33.0ZM422.0 -303.0C394.0 -303.0 362.7 -297.0 328.0 -285.0L390.0 -591.0C419.3 -604.3 450.0 -611.0 482.0 -611.0C519.3 -611.0 550.2 -601.5 574.5 -582.5C598.8 -563.5 611.0 -536.7 611.0 -502.0C611.0 -466.7 597.3 -427.0 570.0 -383.0C562.7 -371.0 554.7 -358.8 546.0 -346.5C537.3 -334.2 529.0 -322.0 521.0 -310.0L504.0 -285.0C479.3 -297.0 452.0 -303.0 422.0 -303.0Z" fill="currentColor"/><path d="M997.0 0V-169C997.0 -191.7 1003.5 -210.3 1016.5 -225.0C1029.5 -239.7 1044.3 -247.0 1061.0 -247.0C1077.7 -247.0 1092.0 -239.2 1104.0 -223.5C1116.0 -207.8 1122.3 -184.3 1123.0 -153.0L1128.0 0.0H1388.0L1382.0 -157.0C1380.7 -194.3 1371.0 -227.0 1353.0 -255.0C1335.0 -283.0 1311.5 -304.3 1282.5 -319.0C1253.5 -333.7 1222.3 -341.0 1189.0 -341.0C1156.3 -341.0 1124.3 -333.7 1093.0 -319.0C1061.7 -304.3 1034.3 -282.3 1011.0 -253.0L1008.0 -254.0C1020.7 -277.3 1037.5 -296.2 1058.5 -310.5C1079.5 -324.8 1101.7 -335.8 1125.0 -343.5C1148.3 -351.2 1178.0 -359.3 1214.0 -368.0C1255.3 -377.3 1288.0 -386.7 1312.0 -396.0C1336.0 -405.3 1356.0 -419.5 1372.0 -438.5C1388.0 -457.5 1396.0 -483.7 1396.0 -517.0C1396.0 -559.0 1385.5 -590.3 1364.5 -611.0C1343.5 -631.7 1315.2 -645.2 1279.5 -651.5C1243.8 -657.8 1197.0 -661.0 1139.0 -661.0L1034.0 -660.0H737.0V0.0ZM1003.5 -300.5C991.8 -282.8 983.7 -262.0 979.0 -238.0V-627.0H989.0C1115.0 -627.0 1178.0 -587.7 1178.0 -509.0C1178.0 -483.0 1171.0 -461.5 1157.0 -444.5C1143.0 -427.5 1121.3 -408.3 1092.0 -387.0C1070.0 -370.3 1052.7 -356.2 1040.0 -344.5C1027.3 -332.8 1015.2 -318.2 1003.5 -300.5Z" fill="currentColor"/><path d="M1596.0 -42.5C1552.7 -61.5 1520.3 -85.7 1499.0 -115.0C1477.0 -145.0 1466.0 -175.3 1466.0 -206.0C1466.0 -227.3 1471.3 -246.5 1482.0 -263.5C1492.7 -280.5 1506.7 -293.7 1524.0 -303.0C1541.3 -312.3 1559.3 -317.0 1578.0 -317.0C1606.7 -317.0 1630.3 -306.7 1649.0 -286.0C1657.7 -276.0 1667.5 -263.2 1678.5 -247.5C1689.5 -231.8 1700.3 -216.0 1711.0 -200.0C1735.7 -163.3 1756.5 -133.8 1773.5 -111.5C1790.5 -89.2 1809.7 -70.0 1831.0 -54.0C1852.3 -38.0 1874.7 -30.0 1898.0 -30.0C1924.7 -30.0 1945.0 -36.8 1959.0 -50.5C1973.0 -64.2 1980.0 -81.0 1980.0 -101.0C1980.0 -117.7 1975.3 -133.7 1966.0 -149.0C1956.7 -164.3 1943.7 -176.0 1927.0 -184.0L1594.0 -354.0C1519.3 -391.3 1482.0 -445.7 1482.0 -517.0C1482.0 -560.3 1492.8 -594.3 1514.5 -619.0C1536.2 -643.7 1566.7 -656.0 1606.0 -656.0H2039.0C2047.7 -641.3 2052.0 -625.3 2052.0 -608.0C2052.0 -588.0 2046.5 -568.0 2035.5 -548.0C2024.5 -528.0 2009.7 -511.7 1991.0 -499.0C1972.3 -486.3 1952.3 -480.0 1931.0 -480.0C1907.7 -480.0 1882.3 -486.5 1855.0 -499.5C1827.7 -512.5 1794.0 -531.7 1754.0 -557.0C1716.0 -579.7 1687.3 -596.0 1668.0 -606.0C1648.7 -616.0 1630.3 -622.0 1613.0 -624.0C1601.7 -626.0 1592.8 -625.0 1586.5 -621.0C1580.2 -617.0 1577.0 -612.0 1577.0 -606.0C1577.0 -598.7 1580.7 -592.3 1588.0 -587.0C1613.3 -569.7 1642.0 -554.3 1674.0 -541.0L1952.0 -420.0C2008.7 -395.3 2048.5 -365.3 2071.5 -330.0C2094.5 -294.7 2106.0 -254.3 2106.0 -209.0C2106.0 -197.7 2104.7 -180.7 2102.0 -158.0C2095.3 -103.3 2070.5 -61.3 2027.5 -32.0C1984.5 -2.7 1927.3 12.0 1856.0 12.0C1820.7 12.0 1779.3 7.7 1732.0 -1.0C1684.7 -9.7 1639.3 -23.5 1596.0 -42.5Z" fill="currentColor"/><path d="M2176.0 -660V0H2416.0V-329H2508.0V0H2748.0V-660H2508.0V-362H2416.0V-660Z" fill="currentColor"/><path d="M3248.0 -42.5C3204.7 -61.5 3172.3 -85.7 3151.0 -115.0C3129.0 -145.0 3118.0 -175.3 3118.0 -206.0C3118.0 -227.3 3123.3 -246.5 3134.0 -263.5C3144.7 -280.5 3158.7 -293.7 3176.0 -303.0C3193.3 -312.3 3211.3 -317.0 3230.0 -317.0C3258.7 -317.0 3282.3 -306.7 3301.0 -286.0C3309.7 -276.0 3319.5 -263.2 3330.5 -247.5C3341.5 -231.8 3352.3 -216.0 3363.0 -200.0C3387.7 -163.3 3408.5 -133.8 3425.5 -111.5C3442.5 -89.2 3461.7 -70.0 3483.0 -54.0C3504.3 -38.0 3526.7 -30.0 3550.0 -30.0C3576.7 -30.0 3597.0 -36.8 3611.0 -50.5C3625.0 -64.2 3632.0 -81.0 3632.0 -101.0C3632.0 -117.7 3627.3 -133.7 3618.0 -149.0C3608.7 -164.3 3595.7 -176.0 3579.0 -184.0L3246.0 -354.0C3171.3 -391.3 3134.0 -445.7 3134.0 -517.0C3134.0 -560.3 3144.8 -594.3 3166.5 -619.0C3188.2 -643.7 3218.7 -656.0 3258.0 -656.0H3691.0C3699.7 -641.3 3704.0 -625.3 3704.0 -608.0C3704.0 -588.0 3698.5 -568.0 3687.5 -548.0C3676.5 -528.0 3661.7 -511.7 3643.0 -499.0C3624.3 -486.3 3604.3 -480.0 3583.0 -480.0C3559.7 -480.0 3534.3 -486.5 3507.0 -499.5C3479.7 -512.5 3446.0 -531.7 3406.0 -557.0C3368.0 -579.7 3339.3 -596.0 3320.0 -606.0C3300.7 -616.0 3282.3 -622.0 3265.0 -624.0C3253.7 -626.0 3244.8 -625.0 3238.5 -621.0C3232.2 -617.0 3229.0 -612.0 3229.0 -606.0C3229.0 -598.7 3232.7 -592.3 3240.0 -587.0C3265.3 -569.7 3294.0 -554.3 3326.0 -541.0L3604.0 -420.0C3660.7 -395.3 3700.5 -365.3 3723.5 -330.0C3746.5 -294.7 3758.0 -254.3 3758.0 -209.0C3758.0 -197.7 3756.7 -180.7 3754.0 -158.0C3747.3 -103.3 3722.5 -61.3 3679.5 -32.0C3636.5 -2.7 3579.3 12.0 3508.0 12.0C3472.7 12.0 3431.3 7.7 3384.0 -1.0C3336.7 -9.7 3291.3 -23.5 3248.0 -42.5Z" fill="currentColor"/><path d="M4247.0 -157V-515H4233.0C4230.3 -452.3 4213.0 -407.2 4181.0 -379.5C4149.0 -351.8 4111.3 -339.0 4068.0 -341.0V-627.0H4139.0C4188.3 -627.0 4230.8 -608.0 4266.5 -570.0C4302.2 -532.0 4334.3 -469.7 4363.0 -383.0H4381.0V-660.0H3828.0V0.0H4381.0V-277.0H4363.0C4334.3 -190.3 4302.2 -128.0 4266.5 -90.0C4230.8 -52.0 4188.3 -33.0 4139.0 -33.0H4068.0V-308.0C4094.7 -309.3 4120.3 -304.3 4145.0 -293.0C4169.7 -281.7 4189.8 -264.3 4205.5 -241.0C4221.2 -217.7 4229.0 -189.7 4229.0 -157.0Z" fill="currentColor"/><path d="M4565.5 -570.0C4601.2 -608.0 4643.7 -627.0 4693.0 -627.0V0.0H4934.0V-627.0C4983.3 -627.0 5025.8 -608.0 5061.5 -570.0C5097.2 -532.0 5129.3 -469.7 5158.0 -383.0H5176.0V-660.0H4451.0V-383.0H4469.0C4497.7 -469.7 4529.8 -532.0 4565.5 -570.0Z" fill="currentColor"/><path d="M5246.0 -660V0H5486.0V-329H5578.0V0H5818.0V-660H5578.0V-362H5486.0V-660Z" fill="currentColor"/><path d="M5888.0 -660V0H6128.0V-660Z" fill="currentColor"/></svg></span>
     <span class="nav-name-mono" id="navNameMono" aria-hidden="true">AS</span>
   </a>
+  <!-- WORK lands on the Cloots brief itself, past the portal, with no
+       animation: the portal block installs a capture-phase click handler on
+       #navWork that jumps the scroll and holds the portal in its up mode.
+       ANY1 left the bar on his instruction, 2026-08-30. -->
   <nav class="nav-links" aria-label="Site">
-    <a href="#cloots">WORK</a>
-    <a href="#any1" class="hide-sm">ANY1</a>
+    <a href="#brief" id="navWork">WORK</a>
     <a href="#journey" class="hide-sm">JOURNEY</a>
     <a href="#contact">CONTACT</a>
     <a class="ext" href="https://cloots.ca" target="_blank" rel="noopener" data-cursor="OPEN">CLOOTS.CA &#8599;</a>
@@ -1141,6 +1170,12 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
      then the engine and the ship. It had six scenes and seven phones, which
      is how the portfolio turned into a Cloots website. See CLAUDE.md 8.1. -->
 <section id="cloots" data-chapter="03" data-phase="any1">
+  <!-- the up-mode band: shown only while html.portal-up, i.e. on the way UP
+       through the portal region and after a WORK jump. One in-flow gradient
+       from transparent (the any1 night showing through) to the Cloots ground,
+       covering approach + frame + tail, so scrolling up past the brief is a
+       gradient that moves 1:1 with the wheel and never the portal. -->
+  <div class="portal-up-band" aria-hidden="true"></div>
 
   <!-- Scene A · the portal. Ground to black, the wordmark strikes in pure
        white, fades to show the screens inside the glyphs, then the fall through
@@ -1270,7 +1305,6 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
             <div class="loop-card" aria-hidden="true"><img src="assets/cloots-screen-algorithm.jpg" alt="" width="900" height="1955" loading="lazy"></div>
           </div>
         </div>
-        <figcaption class="fig mono">THE FEED, THE PRODUCT PAGE, ASK CLOOTS, THE CLOSET, WHAT IT LEARNED · ON THE LOOP THE WORDMARK CARRIES</figcaption>
       </figure>
     </div>
 
@@ -2630,6 +2664,34 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
       var keyholeEl = document.getElementById('keyhole');
       var tailEl = document.querySelector('.portal-tail');
 
+      /* ---- up mode: the portal plays on the way DOWN only ---- */
+      /* Arsh, 2026-08-30: the reader who has been through the portal must not
+         go through it again on the way up; the region between the brief and
+         the bottom of ANY1 is then a plain gradient (the band in the markup,
+         the overrides in CSS under "UP MODE"). Entered from below
+         (onEnterBack of the pin) or by the WORK link; left once the reader is
+         above the approach band, or heading down into it from above, so a
+         fresh descent plays in full. A mid-pin wheel-up (the abort hatch)
+         does NOT engage it: that reader is still inside the story and may
+         scrub it. One class write on <html> per mode change, never per frame
+         (6, trap 18). The frame keeps the cloots label in up mode so the
+         stage never goes black. */
+      var portalUp = false;
+      function setUp(on) {
+        if (portalUp === on) return;
+        portalUp = on;
+        docEl.classList.toggle('portal-up', on);
+        if (on) {
+          autoStop();
+          if (khFrame.getAttribute('data-phase') !== 'cloots') {
+            khFrame.setAttribute('data-phase', 'cloots');
+            if (phaseAPI.go) phaseAPI.go('cloots', 0.05);
+            if (phaseAPI.pick) phaseAPI.pick();
+          }
+        }
+      }
+      window.__portalUp = function () { return portalUp; };   // harness
+
       /* the line, split like the hero's: per-glyph spans, spaces left as text
          so it wraps where it wants, a caret placed from the live rect of the
          last visible glyph; a <i class="tw-br"> in the markup becomes a real
@@ -2773,7 +2835,7 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
         if (a) autoSkipUntil = performance.now() + 1500;
       }, true);
       function autoStart(st) {
-        if (!lenis || mobile || auto || window.__portalAutoOff) return;   // the harness parks the pin by hand
+        if (!lenis || mobile || auto || window.__portalAutoOff || portalUp) return;   // the harness parks the pin by hand
         if (st.direction !== 1 || st.scroll() >= st.end - 1 || performance.now() < autoSkipUntil) return;
         var from = st.start + 1;
         lenis.scrollTo(from, { immediate: true, force: true });   // every run begins at zero
@@ -2799,7 +2861,7 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
          same pace every single time"). Registered once; autoStop only removes
          the driving listeners. */
       function autoRearm(e, down) {
-        if (auto || !lenis || mobile || window.__portalAutoOff || !down) return;
+        if (auto || !lenis || mobile || window.__portalAutoOff || portalUp || !down) return;
         var st = khTl && khTl.scrollTrigger;
         if (!st || !st.isActive || st.progress >= 0.999) return;
         e.preventDefault(); e.stopImmediatePropagation();
@@ -2812,6 +2874,27 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
       window.__portalAutoInfo = function () { return auto ? { from: auto.from, to: auto.to } : null; };
       window.__portalAutoMs = AUTO_MS;
 
+      /* WORK: straight to the brief, no portal. Arsh, 2026-08-30: "when user
+         clicks on work lead the user to 03 · Cloots · Co-founder & Lead
+         Engineer this screen without any previous animation". Capture phase
+         on window so it runs before Lenis's own anchor handling and the
+         page's anchor fallback; up mode first, then an immediate jump to the
+         brief's top less the nav (the 72px every [id] carries as
+         scroll-margin), then one ScrollTrigger.update so every trigger reads
+         the new position now rather than on the next scroll event. */
+      window.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest && e.target.closest('#navWork');
+        if (!a) return;
+        var target = document.getElementById('brief');
+        if (!target) return;
+        e.preventDefault(); e.stopImmediatePropagation();
+        autoSkipUntil = performance.now() + 1500;
+        setUp(true);
+        var y = Math.round(target.getBoundingClientRect().top + window.scrollY - 72);
+        if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y);
+        ScrollTrigger.update();
+      }, true);
+
       var khTl = gsap.timeline({
         scrollTrigger: {
           id: 'portal',
@@ -2822,7 +2905,10 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
           end: function () { return '+=' + Math.round(keyholeEl.offsetHeight + (tailEl ? tailEl.offsetHeight : 0)); },
           scrub: 0.4, anticipatePin: 1, invalidateOnRefresh: true,
           onToggle: function (self) { khSvg.style.willChange = self.isActive ? 'transform' : ''; },
-          onEnter: function (self) { autoStart(self); },     // from above only
+          /* from above only; a WORK jump also crosses the start going down,
+             within its 1.5s anchor window, and must keep its up mode */
+          onEnter: function (self) { if (performance.now() >= autoSkipUntil) setUp(false); autoStart(self); },
+          onEnterBack: function () { setUp(true); },          // from below: never replay
           onLeaveBack: function () { autoStop(); },
           /* geometry in onRefreshInit, which fires BEFORE ScrollTrigger
              re-evaluates the function-valued tweens; in onRefresh it ran after,
@@ -2835,7 +2921,7 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
              line did not end up having (measured at 390 to 350px) */
           onRefresh: function () { requestAnimationFrame(function () { placeCaret(true); }); },
           onUpdate: function (self) {
-            var want = self.progress >= FLIP_AT ? 'cloots' : 'portal';
+            var want = (portalUp || self.progress >= FLIP_AT) ? 'cloots' : 'portal';
             if (khFrame.getAttribute('data-phase') !== want) {
               khFrame.setAttribute('data-phase', want);
               /* go() first, near-instant: the marbling is opaque over the
@@ -2861,6 +2947,7 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
       function chase(time) {
         var st = khTl.scrollTrigger;
         var prog = st ? st.progress : 0;
+        if (portalUp) { if (shown !== 0) showUpTo(0); full = false; return; }
         if (prog >= ERASED_BY || prog <= 0.005) {
           if (shown !== 0) showUpTo(0);
           if (prog <= 0.005) full = false;
@@ -2899,7 +2986,12 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
             trigger: band, start: 'top bottom',
             end: function () { return '+=' + Math.round(band.offsetHeight + window.innerHeight + keyholeEl.offsetHeight + (tailEl ? tailEl.offsetHeight : 0)); },
             scrub: 0.4, invalidateOnRefresh: true,
-            onToggle: function (self) { self.isActive ? breath.play() : breath.pause(); }
+            onToggle: function (self) { self.isActive ? breath.play() : breath.pause(); },
+            /* up mode ends above the band (a fresh descent plays) and on a
+               real descent into it; a WORK jump flies through here too and
+               keeps its mode for its anchor window */
+            onEnter: function () { if (performance.now() >= autoSkipUntil) setUp(false); },
+            onLeaveBack: function () { setUp(false); }
           }
         });
         gTl.fromTo(ground, { opacity: 0 }, { opacity: 1, ease: 'power1.in', duration: A * 0.9 }, 0)

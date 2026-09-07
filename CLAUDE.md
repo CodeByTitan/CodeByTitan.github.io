@@ -1918,7 +1918,13 @@ Review renders accumulate in `_source/review/` (gitignored).
 4. **Editor's Note and Futura ship as font files**, which the settled licence
    position did not cover. See 4.4.
 5. **The og-image** regenerates from the live hero; re-run it after visual
-   changes.
+   changes. DONE 2026-09-07: regenerated at 1200x630 under reduced motion (the
+   typewriter caret photobombs a timed shot; reduced motion is the settled
+   state). Same pass: the app cleared review (verified live,
+   apps.apple.com id6799536166), so og/meta descriptions and the two
+   IN APP STORE REVIEW strings became LIVE ON THE APP STORE, iOS-scoped
+   because Google Play status is unconfirmed. LinkedIn caches og scrapes;
+   re-scrape via linkedin.com/post-inspector after any og change.
 6. **Deployed, 2026-08-30**: https://codebytitan.github.io serves this branch
    through the Pages workflow (2.7). Still open from the deploy: the font
    licences are now a public matter (8.4), the og image should be regenerated

@@ -1575,9 +1575,9 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
   <!-- Each channel says what it is for. A label and a URL in a row is a form;
        naming the job makes it a recommendation. -->
   <nav class="channels" aria-label="Elsewhere">
-    <a class="channel" id="emailRow" href="mailto:sethi.arsh2004@gmail.com" data-magnetic>
+    <a class="channel" id="emailRow" href="mailto:hello@arshsethi.com" data-magnetic>
       <span class="ch-lbl mono" id="emailLbl">EMAIL</span>
-      <span class="ch-val">sethi.arsh2004@gmail.com</span>
+      <span class="ch-val">hello@arshsethi.com</span>
       <span class="ch-why">The fastest way. I answer everything.</span>
     </a>
     <a class="channel" href="https://github.com/CodeByTitan" target="_blank" rel="noopener" data-cursor="OPEN">
@@ -1610,7 +1610,7 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
         <span class="line-mask"><span class="cl">isn&rsquo;t built yet.</span></span>
       </h2>
       <p class="close-sub lead">Come build it with me.</p>
-      <a class="pill close-cta" href="mailto:sethi.arsh2004@gmail.com" data-cursor="MAIL" data-magnetic>sethi.arsh2004@gmail.com</a>
+      <a class="pill close-cta" href="mailto:hello@arshsethi.com" data-cursor="MAIL" data-magnetic>hello@arshsethi.com</a>
     </div>
   </div>
   <div class="footer-legal mono">&copy; 2026 ARSH SETHI &middot; DESIGNED AND BUILT IN CODE, BY ME.</div>
@@ -1658,12 +1658,12 @@ html:not(.js) .loop-card[aria-hidden],html:not(.js) .loop-track{display:none}
   if (emailRow && navigator.clipboard) {
     emailRow.addEventListener('click', function (e) {
       e.preventDefault();
-      navigator.clipboard.writeText('sethi.arsh2004@gmail.com').then(function () {
+      navigator.clipboard.writeText('hello@arshsethi.com').then(function () {
         var old = emailLbl.textContent;
         emailLbl.textContent = 'COPIED';
         emailLbl.style.color = '#0B5D8A';
         setTimeout(function () { emailLbl.textContent = old; emailLbl.style.color = ''; }, 1200);
-      }).catch(function () { window.location.href = 'mailto:sethi.arsh2004@gmail.com'; });
+      }).catch(function () { window.location.href = 'mailto:hello@arshsethi.com'; });
     });
   }
 
